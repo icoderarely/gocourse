@@ -1,0 +1,123 @@
+package main
+
+import "fmt"
+
+func main() {
+	// BASIC/PRIMITIVE DATA TYPES
+	// a. Integers: whole numbers with various sizes
+	var age int = 25                       // Default: 0, platform-dependent size (32 or 64 bit)
+	var count int8 = 127                   // Default: 0, range: -128 to 127
+	var population int16 = 32767           // Default: 0, range: -32768 to 32767
+	var distance int32 = 2147483647        // Default: 0, range: -2^31 to 2^31-1
+	var bigNum int64 = 9223372036854775807 // Default: 0, largest signed integer
+
+	var positive uint = 42                 // Default: 0, unsigned integers (no negative)
+	var small uint8 = 255                  // Default: 0, range: 0 to 255 (also called byte)
+	var medium uint16 = 65535              // Default: 0, range: 0 to 65535
+	var large uint32 = 4294967295          // Default: 0, range: 0 to 2^32-1
+	var huge uint64 = 18446744073709551615 // Default: 0, largest unsigned integer
+
+	var ptr uintptr = 12345 // Default: 0, stores memory addresses
+
+	// b. Floating Point Numbers: decimal numbers
+	var price float32 = 19.99               // Default: 0.0, single precision (32-bit)
+	var precise float64 = 3.141592653589793 // Default: 0.0, double precision (64-bit)
+	// Note: float64 is preferred for most calculations due to better precision
+
+	// c. Complex Numbers: numbers with real and imaginary parts
+	var comp64 complex64 = 1 + 2i         // Default: (0+0i), single precision complex
+	var comp128 complex128 = 3.14 + 2.71i // Default: (0+0i), double precision complex
+	// Note: Use complex() function to create: complex(real, imaginary)
+
+	// d. Booleans: true or false values
+	var isActive bool = true // Default: false
+	var isComplete bool      // Will be false by default
+	// Note: Only true or false, no truthy/falsy values like other languages
+
+	// e. Strings: sequence of characters
+	var name string = "John" // Default: "" (empty string)
+	var message string = `This is a 
+	multi-line string` // Raw string literals use backticks
+	// Note: Strings are immutable in Go, UTF-8 encoded by default
+
+	// f. Runes: represents Unicode code points
+	var letter rune = 'A'  // Default: 0, alias for int32
+	var unicode rune = '🚀' // Can store any Unicode character
+	// Note: Use single quotes for runes, double quotes for strings
+
+	// g. Bytes: alias for uint8
+	var data byte = 65 // Default: 0, represents ASCII 'A'
+	// Note: Often used for binary data manipulation
+
+	// COMPOSITE DATA TYPES
+	// a. Arrays: fixed-size sequences of elements
+	var numbers [5]int = [5]int{1, 2, 3, 4, 5} // Default: all elements are zero-value
+	var fruits [3]string                       // Default: ["", "", ""]
+	var matrix [2][3]int                       // Default: 2D array with all zeros
+	// Note: Size is part of the type, arrays are value types (copied when assigned)
+
+	// b. Slices: dynamic arrays with flexible size
+	var scores []int = []int{85, 92, 78} // Default: nil slice
+	var names []string                   // Default: nil, length and capacity are 0
+	var slice = make([]int, 5, 10)       // Length 5, capacity 10, all elements default to 0
+	// Note: Slices are reference types, backed by underlying arrays
+
+	// c. Maps: key-value pairs (hash tables)
+	var ages map[string]int = map[string]int{"Alice": 30, "Bob": 25} // Default: nil map
+	var grades map[string]float64                                    // Default: nil map, must use make() before use
+	grades = make(map[string]float64)                                // Initialize empty map
+	// Note: Maps are reference types, accessing non-existent key returns zero-value
+
+	// d. Structs: custom types grouping related data
+	type Person struct {
+		Name string // Default: ""
+		Age  int    // Default: 0
+		City string // Default: ""
+	}
+	var person Person = Person{Name: "Alice", Age: 30, City: "NYC"}
+	var employee Person // Default: all fields have their zero-values
+	// Note: Structs are value types, passed by value unless using pointers
+
+	// e. Pointers: variables that store memory addresses
+	var x int = 42
+	var ptr1 *int = &x // Default: nil, points to memory address of x
+	var ptr2 *string   // Default: nil pointer
+	// Note: Use & to get address, * to dereference, nil is zero-value for pointers
+
+	// f. Interfaces: define method signatures
+	type Writer interface {
+		Write([]byte) (int, error)
+	}
+	var w Writer // Default: nil interface
+	// Note: Interfaces are satisfied implicitly, empty interface{} can hold any type
+
+	// g. Channels: used for goroutine communication
+	var ch chan int = make(chan int)                // Default: nil, unbuffered channel
+	var buffered chan string = make(chan string, 5) // Buffered channel with capacity 5
+	var readOnly <-chan int                         // Default: nil, receive-only channel
+	var writeOnly chan<- int                        // Default: nil, send-only channel
+	// Note: Channels are reference types, use close() to close, range over channels
+
+	// h. Functions: first-class citizens in Go
+	var fn func(int) int = func(x int) int { return x * 2 } // Default: nil
+	var callback func(string)                               // Default: nil function
+	// Note: Functions can be assigned to variables, passed as parameters, returned from functions
+
+	// Print examples to demonstrate all variables
+	fmt.Printf("Integers - age: %d, count: %d, population: %d, distance: %d, bigNum: %d\n", age, count, population, distance, bigNum)
+	fmt.Printf("Unsigned - positive: %d, small: %d, medium: %d, large: %d, huge: %d, ptr: %d\n", positive, small, medium, large, huge, ptr)
+	fmt.Printf("Floats - price: %f, precise: %f\n", price, precise)
+	fmt.Printf("Complex - comp64: %v, comp128: %v\n", comp64, comp128)
+	fmt.Printf("Booleans - isActive: %t, isComplete: %t\n", isActive, isComplete)
+	fmt.Printf("Strings - name: %s, message: %s\n", name, message)
+	fmt.Printf("Runes - letter: %c (%d), unicode: %c (%d)\n", letter, letter, unicode, unicode)
+	fmt.Printf("Byte - data: %d (ASCII: %c)\n", data, data)
+	fmt.Printf("Arrays - numbers: %v, fruits: %v, matrix: %v\n", numbers, fruits, matrix)
+	fmt.Printf("Slices - scores: %v, names: %v, slice: %v\n", scores, names, slice)
+	fmt.Printf("Maps - ages: %v, grades: %v\n", ages, grades)
+	fmt.Printf("Structs - person: %+v, employee: %+v\n", person, employee)
+	fmt.Printf("Pointers - ptr1 points to: %d, ptr2: %v\n", *ptr1, ptr2)
+	fmt.Printf("Interface - w: %v\n", w)
+	fmt.Printf("Channels - ch: %T, buffered: %T, readOnly: %T, writeOnly: %T\n", ch, buffered, readOnly, writeOnly)
+	fmt.Printf("Functions - fn result: %d, callback: %v\n", fn(5), callback)
+}
