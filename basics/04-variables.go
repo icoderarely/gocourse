@@ -10,5 +10,5 @@ func main() {
 	// this can only be used within functions
 	name1 := "Name1"
 
-	// variables are block scoped and lives within scope
+	// variables are block scoped
 }

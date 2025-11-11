@@ -17,7 +17,7 @@ func main() {
 	// mostly for constants to stand out as they are immutable
 	const MAXRETRIES = 5
 
-	// mixedCase -> htmlDocument
+	// mixedCase (camelCase) -> htmlDocument
 	// variables
 	employeeID := 1001
 
